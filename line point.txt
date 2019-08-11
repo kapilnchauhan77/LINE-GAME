@@ -1,0 +1,71 @@
+# CodeSkulptor runs Python programs in your browser.
+# Click the upper left button to run this simple demo.
+
+# CodeSkulptor runs in Chrome 18+, Firefox 11+, and Safari 6+.
+# Some features may work in other browsers, but do not expect
+# full functionality.  It does NOT run in Internet Explorer.
+
+import simplegui
+x=49
+y=125
+message = 'Kapil'
+xl=False
+xr=False
+yd=False
+yu=False
+def kd(k):
+    global yu,yd,xl,xr
+    if simplegui.KEY_MAP['up']==k:
+        yu=True
+        yd=False
+    if simplegui.KEY_MAP['down']==k:
+        yu=False
+        yd=True
+    if simplegui.KEY_MAP['left']==k:
+        xl=True
+        xr=False
+    if simplegui.KEY_MAP['right']==k:
+        xr=True
+        xl=False
+def key(k2):
+    print k2
+    
+def ku(k1):
+    global yu,yd,xl,xr
+    if simplegui.KEY_MAP['up']==k1:
+        yu=False
+        yd=False
+    if simplegui.KEY_MAP['down']==k1:
+        yu=False
+        yd=False
+    if simplegui.KEY_MAP['left']==k1:
+        xl=False
+        xr=False
+    if simplegui.KEY_MAP['right']==k1:
+        xr=False
+        xl=False
+    
+        
+# Handler to draw on canvas
+def draw(canvas):
+    global x,y
+    canvas.draw_polyline([(0, 92),(0, 92),(2, 124),(164, 129),(161, 100),(176, 118),(173, 48),(150, 47),(150, 26),(333, 28),(333, 51),(353, 30),(362, 152),(332, 165),(387, 237),(456, 147),(508, 204),(507, 274),(463, 340),(571, 367),(560, 387),(596, 397),(599, 397)],4,'blue')
+    canvas.draw_circle( [x,y], 4,4, "Red",'white')
+    if xr:
+        x+=1
+    if xl:
+        x-=1
+    if yd:
+        y+=1
+    if yu:
+        y-=1
+
+# Create a frame and assign callbacks to event handlers
+frame = simplegui.create_frame("Home", 600, 400,0)
+frame.set_mouseclick_handler(key)
+frame.set_keydown_handler(kd)
+frame.set_keyup_handler(ku)
+frame.set_draw_handler(draw)
+
+# Start the frame animation
+frame.start()
